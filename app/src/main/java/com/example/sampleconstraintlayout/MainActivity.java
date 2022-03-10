@@ -2,6 +2,7 @@ package com.example.sampleconstraintlayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -49,35 +50,47 @@ public class MainActivity extends AppCompatActivity {
 
         password = edpassword.getText().toString();
 
-//        // isi variabel email dan pwd
-//        email = "admin@gmail.com";
-//
-//        pwd = "123456";
+        // isi variabel email dan pwd
+        email = "admin@gmail.com";
+
+        pwd = "123456";
 
         if( nama.isEmpty() && password.isEmpty())
         {
             edemail.setError("Email diperlukan!");
             edpassword.setError("Password diperlukan!");
         }
-        if ( nama.equals("admin@gmail.com") && password.equals("123456"))
+        if ( nama.equals(email) && password.equals(pwd))
         {
             Toast toast = Toast.makeText(getApplicationContext(), "LOGIN SUKSES", Toast.LENGTH_LONG);
             toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0,0);
             toast.show();
+
+            Bundle b = new Bundle();
+
+            b.putString("a", nama.trim());
+
+            b.putString("b", password.trim());
+
+            Intent i = new Intent(getApplicationContext(), ActivityHasil.class);
+
+            i.putExtras(b);
+
+            startActivity(i);
         }
-        else if ( !nama.equals("admin@gmail.com") && password.equals("123456"))
+        else if ( !nama.equals(email) && password.equals(pwd))
         {
             Toast toast = Toast.makeText(getApplicationContext(), "EMAIL SALAH", Toast.LENGTH_LONG);
             toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0,0);
             toast.show();
         }
-        else if ( nama.equals("admin@gmail.com") && !password.equals("123456"))
+        else if ( nama.equals(email) && !password.equals(pwd))
         {
             Toast toast = Toast.makeText(getApplicationContext(), "PASSWORD SALAH", Toast.LENGTH_LONG);
             toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0,0);
             toast.show();
         }
-        else if ( !nama.equals("admin@gmail.com") && !password.equals("123456"))
+        else if ( !nama.equals(email) && !password.equals(pwd))
         {
             Toast toast = Toast.makeText(getApplicationContext(), "EMAIL DAN PASSWORD SALAH", Toast.LENGTH_LONG);
             toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0,0);
